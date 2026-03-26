@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Platform & DevOps Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f14;
+      --surface: #141720;
+      --surface2: #1a1f2e;
+      --accent: #00e5b0;
+      --accent-dim: rgba(0, 229, 176, 0.15);
+      --accent-border: rgba(0, 229, 176, 0.3);
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --border: #1e2330;
+      --font-display: 'DM Serif Display', serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --font-label: 'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 100px 0; }
+    .section-label {
+      font-family: var(--font-label);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text);
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo { font-family: var(--font-label); font-size: 13px; color: var(--accent); letter-spacing: 0.1em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-label);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 58px;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,176,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,176,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 20s linear infinite;
+    }
+    @keyframes gridShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(60px); }
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, var(--bg) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+    .hero-role-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      height: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+    .hero-role-prefix { font-family: var(--font-mono); font-size: 1rem; color: var(--muted); }
+    #role-text { font-family: var(--font-mono); font-size: 1rem; color: var(--accent); font-weight: 500; }
+    .cursor {
+      display: inline-block;
+      width: 2px; height: 1.1em;
+      background: var(--accent);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.6s forwards;
+    }
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.8s forwards;
+    }
+    .hero-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+      text-decoration: none;
+      font-family: var(--font-label);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .hero-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+    .hero-link svg { width: 14px; height: 14px; fill: currentColor; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-bio { font-size: 0.95rem; color: var(--muted); line-height: 1.9; }
+    .about-bio strong { color: var(--text); }
+    .about-stats { display: flex; flex-direction: column; gap: 1.2rem; }
+    .stat-card {
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 1.4rem 1.6rem;
+      background: var(--surface2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover { transform: translateX(4px); box-shadow: -4px 0 20px rgba(0,229,176,0.1); }
+    .stat-value { font-family: var(--font-display); font-size: 2rem; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-family: var(--font-label); font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: flex; flex-direction: column; gap: 2rem; }
+    .skill-group-label {
+      font-family: var(--font-label);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      padding: 0.3rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--surface);
+      cursor: default;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--surface); }
+    .timeline { position: relative; padding-left: 3rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), rgba(0,229,176,0.1));
+      box-shadow: 0 0 12px rgba(0,229,176,0.4);
+    }
+    .timeline-entry { position: relative; }
+    .timeline-dot {
+      position: absolute;
+      left: -3.4rem; top: 1.5rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .timeline-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      background: var(--surface2);
+    }
+    .timeline-role { font-family: var(--font-display); font-size: 1.5rem; color: var(--text); margin-bottom: 0.3rem; }
+    .timeline-meta { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 0.5rem; }
+    .timeline-company { font-family: var(--font-label); font-size: 12px; color: var(--muted); letter-spacing: 0.08em; }
+    .timeline-date {
+      font-family: var(--font-label);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      border-radius: 20px;
+      padding: 0.15rem 0.75rem;
+    }
+    .timeline-note { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 1.5rem; }
+
+    /* Subsections within timeline card */
+    .timeline-subgroups { display: flex; flex-direction: column; gap: 1.5rem; }
+    .timeline-subgroup-label {
+      font-family: var(--font-label);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .timeline-bullets li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding-left: 1.2rem;
+      position: relative;
+      line-height: 1.7;
+    }
+    .timeline-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.7rem;
+      top: 0.25rem;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .project-card {
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.8rem;
+      background: var(--surface);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,229,176,0.08); }
+    .project-card.placeholder {
+      border: 1px dashed var(--border);
+      border-top: 3px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      cursor: default;
+    }
+    .project-card.placeholder:hover { transform: none; box-shadow: none; border-color: var(--accent-border); }
+    .placeholder-icon { font-size: 2rem; color: var(--border); margin-bottom: 0.75rem; }
+    .placeholder-label { font-family: var(--font-label); font-size: 11px; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+    .project-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--text); margin-bottom: 0.75rem; line-height: 1.3; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .project-tag {
+      font-family: var(--font-label);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      border-radius: 3px;
+      padding: 0.15rem 0.5rem;
+      text-transform: uppercase;
+    }
+    .project-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── EXPLORING ── */
+    #exploring { background: var(--surface); overflow: hidden; }
+    .exploring-track-wrap {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .exploring-track {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      animation: ticker 25s linear infinite;
+    }
+    .exploring-track:hover { animation-play-state: paused; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .explore-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--surface2);
+      white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text);
+      transition: border-color 0.2s, color 0.2s;
+      cursor: default;
+    }
+    .explore-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .explore-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 50px 0;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-links a {
+      font-family: var(--font-label);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: var(--border); font-family: var(--font-mono); }
+
+    /* ── HAMBURGER ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s, background 0.2s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--accent); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--accent); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 58px; left: 0; right: 0;
+      background: rgba(13, 15, 20, 0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-label);
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .section { padding: 70px 0; }
+      .container { padding: 0 1.25rem; }
+
+      /* Nav */
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Hero */
+      .hero-links { flex-wrap: wrap; }
+      .hero-link { font-size: 10px; padding: 0.5rem 0.9rem; }
+
+      /* About */
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      /* Timeline */
+      .timeline { padding-left: 1.75rem; }
+      .timeline-dot { left: -2.2rem; top: 1.2rem; width: 8px; height: 8px; }
+      .timeline-card { padding: 1.25rem; }
+      .timeline-role { font-size: 1.25rem; }
+      .timeline-subgroups { gap: 1.2rem; }
+      .timeline-bullets li { font-size: 0.85rem; }
+
+      /* Projects */
+      .projects-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .project-card { padding: 1.25rem; }
+      .project-title { font-size: 1rem; }
+      .project-desc { font-size: 0.83rem; }
+
+      /* Footer */
+      .footer-links { gap: 1.25rem; }
+    }
+
+    @media (max-width: 480px) {
+      .section { padding: 55px 0; }
+      .container { padding: 0 1rem; }
+
+      /* Hero */
+      .hero-tagline { font-size: 0.88rem; }
+      .hero-links { gap: 0.6rem; }
+
+      /* Projects */
+      .projects-grid { grid-template-columns: 1fr; }
+
+      /* Skills */
+      .skill-tag { font-size: 11px; padding: 0.25rem 0.65rem; }
+
+      /* Timeline */
+      .timeline { padding-left: 1.4rem; }
+      .timeline-dot { left: -1.8rem; }
+      .timeline-card { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">// portfolio</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#exploring">Exploring</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#skills" class="mobile-nav-link">Skills</a>
+    <a href="#experience" class="mobile-nav-link">Experience</a>
+    <a href="#projects" class="mobile-nav-link">Projects</a>
+    <a href="#exploring" class="mobile-nav-link">Exploring</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-name">Ajin Jolly</h1>
+        <div class="hero-role-wrap">
+          <span class="hero-role-prefix">~/</span>
+          <span id="role-text"></span><span class="cursor"></span>
+        </div>
+        <p class="hero-tagline">8 years in the industry — from test automation to sole platform ownership, scalable systems, and AI-powered infrastructure.</p>
+        <div class="hero-links">
+          <a href="mailto:ajinjollykannalil@gmail.com" class="hero-link">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Email
+          </a>
+          <a href="#" class="hero-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
+          </a>
+          <a href="#" class="hero-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <p class="section-label reveal">// 01 — about</p>
+      <h2 class="section-title reveal">Who I am.</h2>
+      <div class="about-grid">
+        <div class="about-bio reveal">
+          <p>Platform & DevOps Engineer with <strong>8+ years across the full stack of software delivery</strong> — from test automation and XOps to sole ownership of cloud infrastructure, CI/CD pipelines, containerisation, and AI automation.</p>
+          <br/>
+          <p>Grounded in <strong>system design principles</strong>, building scalable platforms with redundancy and cost-efficiency at their core. Deep <strong>AWS and Cloudflare</strong> focus with a track record of cost-engineering production systems — migrating ~80% of production to EC2 Spot and eliminating unnecessary cloud spend at every layer.</p>
+          <br/>
+          <p>Currently building <strong>AI-powered internal tooling</strong> and automation platforms at Dreamlines GmbH — deploying local LLMs, RAG pipelines, and agentic workflows that keep sensitive data in-house and compliant.</p>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat-card">
+            <div class="stat-value">8+</div>
+            <div class="stat-label">Years Industry Experience</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">Major Infrastructure Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">80%</div>
+            <div class="stat-label">Production on Spot Instances</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="container">
+      <p class="section-label reveal">// 02 — skills</p>
+      <h2 class="section-title reveal">What I work with.</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Cloud & AWS</p>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span><span class="skill-tag">ECS</span><span class="skill-tag">EKS</span><span class="skill-tag">EC2 Spot</span><span class="skill-tag">S3</span><span class="skill-tag">VPC</span><span class="skill-tag">NAT Gateway</span><span class="skill-tag">CloudWatch</span><span class="skill-tag">IAM</span><span class="skill-tag">Cost Explorer</span><span class="skill-tag">RDS</span><span class="skill-tag">Lambda</span><span class="skill-tag">Bedrock</span><span class="skill-tag">Cognito</span><span class="skill-tag">Route53</span><span class="skill-tag">EFS</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Containers</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Docker</span><span class="skill-tag">Podman</span><span class="skill-tag">containerd</span><span class="skill-tag">runc</span><span class="skill-tag">Distroless (non-root)</span><span class="skill-tag">Multi-stage builds</span><span class="skill-tag">Docker Buildx</span><span class="skill-tag">Docker Bake</span><span class="skill-tag">Alpine</span><span class="skill-tag">Trivy</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">IaC</p>
+          <div class="skill-tags">
+            <span class="skill-tag">OpenTofu</span><span class="skill-tag">Terraform</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">CI/CD</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Bitbucket Pipelines</span><span class="skill-tag">Jenkins</span><span class="skill-tag">n8n</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Job Orchestration</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Apache Airflow</span><span class="skill-tag">Airflow 2.x → 3.0</span><span class="skill-tag">ECSRunTaskOperator</span><span class="skill-tag">DAG authoring</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">AI & LLMs</p>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS Bedrock</span><span class="skill-tag">Azure AI Foundry</span><span class="skill-tag">Ollama</span><span class="skill-tag">Microsoft Presidio</span><span class="skill-tag">n8n</span><span class="skill-tag">RAG (evaluated)</span><span class="skill-tag">OpenWebUI (evaluated)</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Identity & Access</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Keycloak</span><span class="skill-tag">Cloudflare Zero Trust</span><span class="skill-tag">Microsoft Entra</span><span class="skill-tag">AWS Cognito</span><span class="skill-tag">OIDC</span><span class="skill-tag">OAuth2</span><span class="skill-tag">SSO</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Monitoring & Observability</p>
+          <div class="skill-tags">
+            <span class="skill-tag">CloudWatch</span><span class="skill-tag">Grafana</span><span class="skill-tag">Logstash</span><span class="skill-tag">OpenTelemetry (OTEL)</span><span class="skill-tag">Custom metrics</span><span class="skill-tag">Alerting</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Networking & Security</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Cloudflare CDN</span><span class="skill-tag">WAF</span><span class="skill-tag">OpenVPN</span><span class="skill-tag">Route53</span><span class="skill-tag">VPC Flow Logs</span><span class="skill-tag">DNS</span><span class="skill-tag">TLS</span><span class="skill-tag">MFA</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Databases</p>
+          <div class="skill-tags">
+            <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MSSQL</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Languages & Tooling</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span><span class="skill-tag">Bash</span><span class="skill-tag">Streamlit</span>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <p class="skill-group-label">Linux</p>
+          <div class="skill-tags">
+            <span class="skill-tag">apt / yum / apk</span><span class="skill-tag">systemd</span><span class="skill-tag">Networking</span><span class="skill-tag">Firewalls</span><span class="skill-tag">Process management</span><span class="skill-tag">System administration</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section">
+    <div class="container">
+      <p class="section-label reveal">// 03 — experience</p>
+      <h2 class="section-title reveal">Where I've worked.</h2>
+      <div class="timeline reveal">
+
+        <div class="timeline-entry" style="margin-bottom: 2.5rem;">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-role">Platform Engineer</div>
+            <div class="timeline-meta">
+              <span class="timeline-company">Dreamlines GmbH · Cruise Industry</span>
+              <span class="timeline-date">2022 — Present</span>
+            </div>
+            <p class="timeline-note">Sole ops engineer — full ownership of cloud infrastructure, CI/CD, containers, identity, job orchestration, and AI tooling.</p>
+
+            <div class="timeline-subgroups">
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">Infrastructure & Cost</p>
+                <ul class="timeline-bullets">
+                  <li>Own the complete AWS estate — VPCs, ECS clusters, RDS, S3, IAM, CloudWatch, Cost Explorer. Every architectural decision, every incident.</li>
+                  <li>Comfortable across the full AWS spectrum: from spinning up a basic EC2 instance to architecting production-grade platforms like self-hosted Airflow and Keycloak — always with security and cost built in from the start.</li>
+                  <li>Ran a company-wide cost reduction programme: audited VPC flow logs, right-sized NAT gateways, restructured S3 access patterns, enforced resource tagging, and implemented S3 lifecycle policies to tier objects by access frequency. Migrated ~80% of production to EC2 Spot with ECS capacity providers and automatic On-Demand fallback.</li>
+                  <li>Solid hands-on experience with AWS Bedrock — used for internal automations where GDPR constraints make routing data through external AI providers impractical.</li>
+                  <li>Migrated container orchestration from EKS to ECS. Kubernetes was overkill — ECS simplified operations, reduced cost, and removed a maintenance surface nobody had bandwidth for.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">Containers</p>
+                <ul class="timeline-bullets">
+                  <li>Containerised legacy .NET Framework applications — multi-stage Docker builds, Windows/Linux compatibility, decade-old workloads running cleanly on ECS.</li>
+                  <li>All public-facing services run as distroless, non-root containers. No shell, no package manager — minimal attack surface, limited blast radius.</li>
+                  <li>Integrated Trivy into CI pipelines for image scanning — vulnerabilities caught before production, not after.</li>
+                  <li>Reduced build times using Docker Buildx with layer caching, Alpine base images, multi-stage builds, and Docker Bake for complex multi-image definitions. containerd/runc familiarity, Podman for rootless workflows.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">CI/CD</p>
+                <ul class="timeline-bullets">
+                  <li>Migrated all CI/CD from Jenkins to Bitbucket Pipelines. Started with in-house EC2-based runners with auto-scaling (scale to zero at rest). Later moved to Bitbucket-hosted build minutes with custom pipeline images. Retained self-hosted EC2 runners only for Windows-based container builds — no hosted Windows builder exists in Bitbucket.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">Internal Platforms on AWS</p>
+                <ul class="timeline-bullets">
+                  <li>Designed and operate a shared Airflow platform used by several internal teams. UI and scheduler run as ECS services, DAGs synced from S3, EFS for persistent storage, logs to CloudWatch. 200+ production jobs run as individual ECS tasks via ECSRunTaskOperator — elastic scaling, no idle worker cost. Replaced AWS MWAA entirely. Owned the full Airflow 2.3 → 3.0 migration with no disruption.</li>
+                  <li>Deployed self-hosted Keycloak on ECS as the company-wide identity provider — OIDC/OAuth2 SSO across all internal apps, user federation, client configs, role mappings. Subsequently migrated to Cloudflare Zero Trust, replacing the self-hosted layer with a managed, policy-driven access platform.</li>
+                  <li>Deployed and automated an OpenVPN platform on ECS serving nearly 200 users across multiple countries. Zero-touch user provisioning and deprovisioning via Lambda, multi-AZ redundancy, full Terraform IaC. Built a Streamlit dashboard for ops to instantly provision users or kick active sessions without touching infrastructure.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">AI & Automation</p>
+                <ul class="timeline-bullets">
+                  <li>Familiar with RAG pipelines, vector databases, and OpenWebUI — tested and evaluated as part of the internal AI stack.</li>
+                  <li>Used AWS Bedrock and Azure AI Foundry to deploy and run foundation models for internal automations. Both chosen for GDPR compliance — models run within the cloud environment, data never leaves.</li>
+                  <li>Built a GDPR compliance gateway using Microsoft Presidio for PII detection and anonymisation, backed by a locally-hosted Ollama model. Any data heading to an external AI provider passes through it first.</li>
+                  <li>Built an end-to-end call analytics pipeline: S3 ingestion → transcription → LLM-based KPI extraction → automated dashboards. Replaced a fully manual review process.</li>
+                  <li>Built an invoice automation workflow using n8n: captures invoices from email, extracts details, pushes to relevant systems. Saved 1000+ manhours of manual processing.</li>
+                  <li>Built several other workflow automations across teams — removing repetitive work and connecting systems that were never integrated.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">Identity & Access</p>
+                <ul class="timeline-bullets">
+                  <li>Experienced with Microsoft Entra — app registrations, API permissions, and access policy management.</li>
+                  <li>Familiar with AWS Cognito — used for application authentication at the load balancer level, with users sourced from Azure AD federation and IAM.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">Monitoring & Observability</p>
+                <ul class="timeline-bullets">
+                  <li>Set up and maintain Grafana for infrastructure and application dashboards — collectors, data sources, and dashboards used daily by engineering and ops.</li>
+                  <li>Configured Logstash for log ingestion and shipping across application and infrastructure streams.</li>
+                  <li>Instrumented production ECS applications with OpenTelemetry (OTEL) — collector layer routing container metrics into CloudWatch without third-party tooling.</li>
+                  <li>Built out CloudWatch from scratch: custom metrics from all applications and infrastructure, alarms, and dashboards covering the full stack.</li>
+                  <li>Designed a priority-based on-call alerting system — production-only, tiered by severity. On-call gets paged for what matters, not drowned in noise.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-subgroup">
+                <p class="timeline-subgroup-label">Networking & Security</p>
+                <ul class="timeline-bullets">
+                  <li>Manage Cloudflare as the company CDN and security perimeter: DNS, cache rules, WAF policies, DDoS protection, and performance configuration across all public properties.</li>
+                  <li>Internal services DNS-resolved via Route53, only reachable through the VPN — no internal tooling exposed to the public internet.</li>
+                  <li>Audited and cleaned up IAM — removed unused users, roles, and policies, tightened permission boundaries, enforced least-privilege across the board.</li>
+                  <li>Strict zero-trust access model for developers and internal users — every role scoped to exactly what it needs, access granted deliberately, not by default.</li>
+                  <li>Production logging and anomaly detection via CloudWatch — log groups, metric filters, and alarms configured to surface suspicious activity in real time.</li>
+                  <li>MFA enforced for all IAM users including CLI access, using aws-mfa for temporary credentials — no long-lived access keys in the wild.</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-entry" style="margin-bottom: 2.5rem;">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-role">XOps Engineer</div>
+            <div class="timeline-meta">
+              <span class="timeline-company">Natix · Hamburg</span>
+              <span class="timeline-date">2021 — 2022</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-role">Automation Test Engineer</div>
+            <div class="timeline-meta">
+              <span class="timeline-company">QBurst · India</span>
+              <span class="timeline-date">2018 — 2021</span>
+            </div>
+            <p class="timeline-note">3 years building automated test frameworks and pipelines.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <p class="section-label reveal">// 04 — projects</p>
+      <h2 class="section-title reveal">What I've built.</h2>
+      <div class="projects-grid">
+
+        <div class="project-card reveal">
+          <h3 class="project-title">Airflow on ECS</h3>
+          <div class="project-stack">
+            <span class="project-tag">Apache Airflow</span><span class="project-tag">ECS</span><span class="project-tag">EFS</span><span class="project-tag">S3</span><span class="project-tag">ECSRunTaskOperator</span>
+          </div>
+          <p class="project-desc">Self-hosted Airflow replacing AWS MWAA entirely. UI and scheduler on ECS, DAGs from S3, EFS for storage, CloudWatch for logs. 200+ production jobs as individual ECS tasks — elastic scaling, no idle cost. Owned the full 2.3 → 3.0 migration with zero disruption.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <h3 class="project-title">Production Spot Instance Strategy</h3>
+          <div class="project-stack">
+            <span class="project-tag">EC2 Spot</span><span class="project-tag">ECS</span><span class="project-tag">Auto Scaling</span><span class="project-tag">Capacity Providers</span>
+          </div>
+          <p class="project-desc">ECS capacity providers blending Spot and On-Demand with graceful task draining and automatic fallback. ~80% of production on Spot — significant monthly savings with no impact to uptime or deployments.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <h3 class="project-title">GDPR AI Compliance Gateway</h3>
+          <div class="project-stack">
+            <span class="project-tag">Ollama</span><span class="project-tag">Microsoft Presidio</span><span class="project-tag">Docker</span><span class="project-tag">ECS</span>
+          </div>
+          <p class="project-desc">PII detection and anonymisation gateway using Microsoft Presidio backed by a locally-hosted Ollama model. All data heading to external AI providers passes through it first — enabling company-wide AI adoption without legal exposure.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <h3 class="project-title">AI Call Analytics Pipeline</h3>
+          <div class="project-stack">
+            <span class="project-tag">n8n</span><span class="project-tag">LLM</span><span class="project-tag">Python</span><span class="project-tag">AWS</span><span class="project-tag">S3</span>
+          </div>
+          <p class="project-desc">End-to-end pipeline: S3 ingestion → audio transcription → LLM-based KPI extraction → automated dashboards. Replaced a fully manual call review process and surfaced insights at a scale previously impossible.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <h3 class="project-title">Keycloak SSO → Cloudflare Zero Trust</h3>
+          <div class="project-stack">
+            <span class="project-tag">Keycloak</span><span class="project-tag">ECS</span><span class="project-tag">OIDC</span><span class="project-tag">Cloudflare Zero Trust</span>
+          </div>
+          <p class="project-desc">Deployed self-hosted Keycloak on ECS as company-wide SSO — OIDC/OAuth2 across all internal apps, user federation, role mappings. Then migrated to Cloudflare Zero Trust: managed, policy-driven access with identity-aware controls, zero self-hosting overhead.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <h3 class="project-title">Automated OpenVPN on ECS</h3>
+          <div class="project-stack">
+            <span class="project-tag">OpenVPN</span><span class="project-tag">ECS</span><span class="project-tag">Lambda</span><span class="project-tag">Terraform</span><span class="project-tag">Streamlit</span>
+          </div>
+          <p class="project-desc">Self-healing VPN platform serving ~200 users across multiple countries. Zero-touch user lifecycle via Lambda, multi-AZ redundancy, full Terraform IaC. Streamlit dashboard for instant user provisioning and session termination without touching infrastructure.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORING -->
+  <section id="exploring" class="section">
+    <div class="container">
+      <p class="section-label reveal">// 05 — currently exploring</p>
+      <h2 class="section-title reveal">What's next.</h2>
+    </div>
+    <div class="exploring-track-wrap reveal">
+      <div class="exploring-track" id="explore-track"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-links reveal">
+        <a href="mailto:ajinjollykannalil@gmail.com">Email</a>
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="footer-copy">© 2026 [Your Name]</p>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Role typewriter
+    const roles = ['Platform Engineer', 'AWS Specialist', 'AI Automation Engineer', 'DevOps Engineer'];
+    let roleIdx = 0, charIdx = 0, deleting = false;
+    const roleEl = document.getElementById('role-text');
+    function typeRole() {
+      const current = roles[roleIdx];
+      if (!deleting) {
+        roleEl.textContent = current.slice(0, ++charIdx);
+        if (charIdx === current.length) { deleting = true; setTimeout(typeRole, 2000); return; }
+      } else {
+        roleEl.textContent = current.slice(0, --charIdx);
+        if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+      }
+      setTimeout(typeRole, deleting ? 45 : 80);
+    }
+    setTimeout(typeRole, 800);
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const siblings = [...e.target.parentElement.querySelectorAll('.reveal:not(.visible)')];
+          const idx = siblings.indexOf(e.target);
+          setTimeout(() => e.target.classList.add('visible'), idx * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Exploring ticker
+    const items = [
+      'Agentic AI workflows',
+      'LLM orchestration with n8n',
+      'Claude Code for internal tooling',
+      'OpenTofu / open-source IaC',
+      'Internal developer platforms',
+      'Vector DB architecture',
+      'AI-native CI/CD pipelines',
+      'Cost-efficient GPU inference',
+      'Azure AI Foundry',
+      'Airflow 3.0 patterns',
+    ];
+    const track = document.getElementById('explore-track');
+    [...items, ...items].forEach(label => {
+      const pill = document.createElement('div');
+      pill.className = 'explore-pill';
+      pill.innerHTML = `<span class="explore-pill-dot"></span>${label}`;
+      track.appendChild(pill);
+    });
+  </script>
+</body>
+</html>
