@@ -387,6 +387,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-social">
@@ -411,6 +412,7 @@
     <a href="#skills" class="mobile-nav-link">Skills</a>
     <a href="#experience" class="mobile-nav-link">Experience</a>
     <a href="#projects" class="mobile-nav-link">Projects</a>
+    <a href="#education" class="mobile-nav-link">Education</a>
     <a href="#contact" class="mobile-nav-link">Contact</a>
   </div>
 
@@ -447,11 +449,11 @@
             <div class="stat-label">Years Industry Experience</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">200+</div>
-            <div class="stat-label">Airflow Jobs in Production</div>
+            <div class="stat-value">1000+</div>
+            <div class="stat-label">Man-hours Saved via AI Automation</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">80%</div>
+            <div class="stat-value">90%</div>
             <div class="stat-label">Production on Spot Instances</div>
           </div>
         </div>
@@ -483,14 +485,14 @@
         <div class="skill-group reveal">
           <p class="skill-group-label">IaC & CI/CD</p>
           <div class="skill-tags">
-            <span class="skill-tag">OpenTofu</span><span class="skill-tag">Terraform</span><span class="skill-tag">CloudFormation</span><span class="skill-tag">Bitbucket Pipelines</span><span class="skill-tag">Jenkins</span><span class="skill-tag">GitLab CI</span><span class="skill-tag">Snyk</span><span class="skill-tag">SonarQube</span><span class="skill-tag">DeepSource</span>
+            <span class="skill-tag">OpenTofu</span><span class="skill-tag">Terraform</span><span class="skill-tag">CloudFormation</span><span class="skill-tag">Bitbucket Pipelines</span><span class="skill-tag">Jenkins</span><span class="skill-tag">GitLab CI</span><span class="skill-tag">n8n</span><span class="skill-tag">trigger.dev</span><span class="skill-tag">Snyk</span><span class="skill-tag">SonarQube</span><span class="skill-tag">DeepSource</span>
           </div>
         </div>
 
         <div class="skill-group reveal">
           <p class="skill-group-label">AI & Automation</p>
           <div class="skill-tags">
-            <span class="skill-tag">AWS Bedrock</span><span class="skill-tag">Azure AI Foundry</span><span class="skill-tag">Ollama</span><span class="skill-tag">Presidio</span><span class="skill-tag">n8n</span><span class="skill-tag">Airflow</span><span class="skill-tag">ECSRunTaskOperator</span>
+            <span class="skill-tag">AWS Bedrock</span><span class="skill-tag">Azure AI Foundry</span><span class="skill-tag">Ollama</span><span class="skill-tag">Presidio</span><span class="skill-tag">n8n</span><span class="skill-tag">trigger.dev</span><span class="skill-tag">MCP Servers</span><span class="skill-tag">Gemma 4</span><span class="skill-tag">Whisper</span><span class="skill-tag">Claude Code</span><span class="skill-tag">Antigravity</span><span class="skill-tag">Airflow</span><span class="skill-tag">ECSRunTaskOperator</span>
           </div>
         </div>
 
@@ -553,18 +555,24 @@
               <span class="highlight-tag">Terraform</span>
               <span class="highlight-tag">Cloudflare</span>
               <span class="highlight-tag">AI & LLMs</span>
+              <span class="highlight-tag">MCP Servers</span>
+              <span class="highlight-tag">Agentic AI</span>
+              <span class="highlight-tag">trigger.dev</span>
               <span class="highlight-tag">CI/CD</span>
             </div>
             <ul class="timeline-bullets">
-              <li>Own the full AWS estate — VPCs, ECS clusters, RDS, S3, IAM, CloudWatch. Every architectural decision, every incident. Migrated ~80% of production to EC2 Spot with capacity providers and On-Demand fallback — significant monthly savings with no downtime.</li>
+              <li>Own the full AWS estate — VPCs, ECS clusters, RDS, S3, IAM, CloudWatch. Every architectural decision, every incident. Cut monthly cloud costs by 70% by architecting ECS workloads across 90% Spot instances with capacity provider fallback to On-Demand — zero downtime.</li>
               <li>Led on-premise to AWS migration — servers to EC2, databases to RDS. Also managed and maintained EKS before migrating to ECS when Kubernetes complexity outweighed the benefit.</li>
               <li>Docker specialist — distroless non-root images for all public services, Trivy scanning in CI, Buildx layer caching, Docker Bake for multi-image builds. Containerised legacy .NET Framework apps.</li>
               <li>Built and operate self-hosted Airflow on ECS (EFS storage, S3 DAGs, CloudWatch logs) replacing AWS MWAA — 200+ production jobs via ECSRunTaskOperator. Owned the 2.3 → 3.0 migration with zero disruption.</li>
-              <li>Full CI/CD ownership — migrated Jenkins to Bitbucket Pipelines, set up multi-agent Jenkins, blue/green ECS deployments with rollback, artifact publishing to CodeArtifact, JFrog, and npm. Integrated Snyk, SonarQube, and DeepSource for code quality and security.</li>
-              <li>Built AI tooling: GDPR compliance gateway (Presidio + Ollama), call analytics pipeline (S3 → transcription → LLM → dashboards), invoice automation with n8n saving 1000+ manhours. Used AWS Bedrock and Azure AI Foundry for GDPR-safe model usage.</li>
+              <li>Full CI/CD ownership across 20+ projects — migrated Jenkins to Bitbucket Pipelines, set up multi-agent Jenkins, blue/green ECS deployments with rollback, artifact publishing to CodeArtifact, JFrog, and npm. Integrated Snyk, SonarQube, and DeepSource. Go-to engineer for 15+ developers spanning the full stack from Cloudflare CDN through to production container logs.</li>
+              <li>Built AI tooling: GDPR compliance gateway (Presidio + spaCy + Ollama), call analytics pipeline (S3 → transcription → LLM → dashboards), invoice automation with n8n and trigger.dev saving 1000+ manhours. Used AWS Bedrock and Azure AI Foundry for GDPR-safe model usage.</li>
+              <li>Built MCP servers exposing internal APIs and databases as tools for AI agents — enabling automation workflows to talk directly to internal systems without per-integration glue code.</li>
+              <li>Deployed self-hosted AI models for internal use — Gemma 4 (LLM inference) and Whisper (speech-to-text) — keeping sensitive data on-premise and fully within GDPR and security boundaries. Set up skill files for coding agents and built a merge request analysis agent to automate code review workflows.</li>
+              <li>Built internal dashboards and tooling using agentic coding with Antigravity and Claude Code, including multi-agent orchestrator workflows — reducing internal tool delivery time significantly.</li>
               <li>Identity and access: Keycloak SSO on ECS → migrated to Cloudflare Zero Trust. Exposed private internal services publicly via Zero Trust SSO. Deployed OpenVPN on ECS for ~200 users across multiple countries with Streamlit self-service dashboard.</li>
               <li>Full observability stack: CloudWatch (metrics, alarms, dashboards), Grafana, OpenTelemetry on ECS, ELK, OpenSearch, Uptime Kuma, SolarWinds, StatusCake — all monitoring managed with Terraform. Priority-based on-call alerting, production only.</li>
-              <li>Networking and security: Cloudflare CDN/WAF, Route53 for internal DNS (VPN-only), zero-trust IAM, MFA with aws-mfa, SSL/TLS auto-renewal, anomaly detection via CloudWatch.</li>
+              <li>Networking and security: Cloudflare CDN/WAF/Workers, Cloudflare Zero Trust with Azure AD SSO for internal app access, Route53 for internal DNS (VPN-only), zero-trust IAM, MFA with aws-mfa, SSL/TLS auto-renewal, anomaly detection via CloudWatch. Performed DDoS analysis post-incident and hardened WAF rules.</li>
             </ul>
           </div>
         </div>
@@ -574,13 +582,13 @@
           <div class="timeline-dot"></div>
           <div class="timeline-card">
             <div class="timeline-header">
-              <div class="timeline-role">XOps Engineer</div>
+              <div class="timeline-role">DevOps Engineer <span style="font-size:0.75rem;color:var(--muted);font-family:var(--font-mono)">(Part-time)</span></div>
               <div class="timeline-meta">
                 <span class="timeline-company">Natix · Hamburg</span>
-                <span class="timeline-date">2021 — 2022</span>
+                <span class="timeline-date">Oct 2021 — Apr 2022</span>
               </div>
             </div>
-            <p class="timeline-note">AI-driven edge monitoring startup (~15 people). Ops team — infrastructure for computer vision devices in the field.</p>
+            <p class="timeline-note">AI-driven edge monitoring startup. Ops team — infrastructure for computer vision devices in the field. Collaborated with hardware and ML teams to deliver production-grade infrastructure under resource constraints.</p>
             <div class="timeline-highlights">
               <span class="highlight-tag">Kubernetes</span>
               <span class="highlight-tag">Helm</span>
@@ -604,11 +612,11 @@
             <div class="timeline-header">
               <div class="timeline-role">Automation Test Engineer</div>
               <div class="timeline-meta">
-                <span class="timeline-company">QBurst · India</span>
-                <span class="timeline-date">2018 — 2021</span>
+                <span class="timeline-company">QBurst Technologies · Technopark, India</span>
+                <span class="timeline-date">Jul 2018 — Aug 2021</span>
               </div>
             </div>
-            <p class="timeline-note">Large software services company. Embedded in the test automation team for a major Japanese e-commerce platform.</p>
+            <p class="timeline-note">Large digital engineering company. Embedded in the test automation team for Uniqlo (Fast Retailing) — a high-scale Japanese e-commerce platform handling thousands of daily transactions.</p>
             <div class="timeline-highlights">
               <span class="highlight-tag">Selenium</span>
               <span class="highlight-tag">Protractor</span>
@@ -619,10 +627,11 @@
               <span class="highlight-tag">Docker</span>
             </div>
             <ul class="timeline-bullets">
-              <li>Built and maintained automation test suites with Protractor, Selenium, and Puppeteer — UI, regression, and cross-browser coverage.</li>
-              <li>Load and performance testing with Gatling and JMeter — backend-focused, realistic traffic simulation for a high-scale platform.</li>
-              <li>API and integration testing with local Docker Compose environments — first exposure to containerisation, which led to a career pivot into platform engineering.</li>
-              <li>Wrote Jenkins pipelines to integrate automated tests into the CI process. Used Python and Bash for test tooling and scripting.</li>
+              <li>Built and maintained automation test suites with Protractor and Selenium across Uniqlo's platform — covered critical workflows from landing page to checkout, enabling faster release cycles and freeing QA team capacity.</li>
+              <li>Load and performance testing with Gatling and JMeter — identified critical bottlenecks from third-party services under high concurrent load, preventing production incidents.</li>
+              <li>Integration testing across 15+ microservices post-release to staging and production — coordinated with QA teams to catch integration issues before customer impact.</li>
+              <li>Architected Docker Compose environments for API testing and wrote Jenkins pipelines to standardise CI test execution — the foundation that sparked a career pivot into platform engineering.</li>
+              <li>Headless browser automation with Puppeteer and Python test utilities. Performed root cause analysis on production API incidents using Kibana log aggregation across distributed services.</li>
             </ul>
           </div>
         </div>
@@ -651,7 +660,7 @@
           <div class="project-stack">
             <span class="project-tag">EC2 Spot</span><span class="project-tag">ECS</span><span class="project-tag">Capacity Providers</span><span class="project-tag">ALB</span>
           </div>
-          <p class="project-desc">~80% of production on Spot via ECS capacity providers with graceful draining and On-Demand fallback. Significant cost reduction, zero uptime impact.</p>
+          <p class="project-desc">90% of production on Spot via ECS capacity providers with graceful draining and On-Demand fallback. Cut monthly cloud costs by 70%, zero uptime impact.</p>
         </div>
 
         <div class="project-card reveal">
@@ -681,11 +690,49 @@
         <div class="project-card reveal">
           <h3 class="project-title">AI Call Analytics Pipeline</h3>
           <div class="project-stack">
-            <span class="project-tag">n8n</span><span class="project-tag">LLM</span><span class="project-tag">Python</span><span class="project-tag">S3</span>
+            <span class="project-tag">n8n</span><span class="project-tag">trigger.dev</span><span class="project-tag">LLM</span><span class="project-tag">Python</span><span class="project-tag">S3</span>
           </div>
           <p class="project-desc">Automated ingestion of call recordings → transcription → LLM-based KPI extraction → dashboards. Replaced a fully manual review process entirely.</p>
         </div>
 
+        <div class="project-card reveal">
+          <h3 class="project-title">MCP Servers for Internal AI Agents</h3>
+          <div class="project-stack">
+            <span class="project-tag">MCP</span><span class="project-tag">Python</span><span class="project-tag">n8n</span><span class="project-tag">trigger.dev</span><span class="project-tag">AWS</span>
+          </div>
+          <p class="project-desc">Built MCP servers exposing internal APIs and databases as structured tools for AI agents — enabling automation workflows to interact directly with internal systems without per-integration glue code.</p>
+        </div>
+
+        <div class="project-card reveal">
+          <h3 class="project-title">Agentic Internal Tooling & Dashboards</h3>
+          <div class="project-stack">
+            <span class="project-tag">Claude Code</span><span class="project-tag">Antigravity</span><span class="project-tag">Multi-Agent</span><span class="project-tag">Gemma 4</span><span class="project-tag">Whisper</span>
+          </div>
+          <p class="project-desc">Built internal dashboards and tools using agentic coding with Antigravity and Claude Code in multi-agent orchestrator mode. Deployed Gemma 4 and Whisper on-premise for GDPR-safe LLM inference and speech-to-text — zero data leaving the environment.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section">
+    <div class="container">
+      <p class="section-label reveal">// education</p>
+      <h2 class="section-title reveal">Where I studied.</h2>
+      <div class="timeline reveal">
+        <div class="timeline-entry">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <div class="timeline-role">B.Tech, Computer Science and Engineering</div>
+              <div class="timeline-meta">
+                <span class="timeline-company">Saintgits College of Engineering · Kottayam, Kerala, India</span>
+                <span class="timeline-date">2014 — 2018</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
